@@ -7,6 +7,8 @@ func game_over():
 	$ScoreTimer.stop()
 	$MobTimer.stop()
 	$HUD.show_game_over()
+	$Music.stop()
+	$DeathSound.play()
 
 func new_game():
 	score = 0
@@ -14,6 +16,8 @@ func new_game():
 	$StartTimer.start()
 	$HUD.update_score(score)
 	$HUD.show_message("Get Ready")
+	get_tree().call_group("mobs", "queue_free")
+	$Music.play()
 
 func _on_score_timer_timeout():
 	score += 1
@@ -43,10 +47,6 @@ func _on_mob_timer_timeout():
 	mob.linear_velocity = velocity.rotated(direction)
 
 	add_child(mob)
-
-
-func _ready():
-	new_game()
 
 
 func _on_player_hit() -> void:

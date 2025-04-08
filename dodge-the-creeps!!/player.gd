@@ -6,7 +6,8 @@ var screen_size  # Tamaño de la ventana del juego.
 signal hit
 
 func _ready():
-	screen_size = get_viewport_rect().size    
+	screen_size = get_viewport_rect().size   
+	hide() #oculta el personaje 
 
 func _process(delta):
 	var velocity = Vector2.ZERO  # El vector de movimiento del jugador.
